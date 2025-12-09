@@ -10,22 +10,31 @@ public class Emprestimo {
     private List<Livro> livros = new ArrayList<>();
     private double valorTotal = 0;
 
+    public String getSituacao() {
+        return situacao;
+    }
+
+    public Emprestimo(int id, Leitor leitor) {
+        this.id = id;
+        this.leitor = leitor;
+    }
+    public List<Livro> getLivros() {
+        return livros;
+    }
+
     public void adicionarLivroAoEmprestimo(Livro livro){
         livros.add(livro);
     }
-    public int qtdLivrosEmprestados(){
-        if(livros.size() < 1){
-            throw new IllegalArgumentException("Nenhum livro adicionado ainda!");
-        }
-        return livros.size();
-    }
+
     public double valorTotalEmprestimo(){
+        double contagemTotal = 0;
         for (Livro livro : livros){
-            valorTotal += livro.getPreco();
+            contagemTotal += livro.getPreco();
         }
+        valorTotal = contagemTotal;
         return valorTotal;
     }
-    public void fecharEmprestimo(String situacao){
+    public void fecharEmprestimo(){
         if(livros.size() < 1){
             throw new IllegalArgumentException("Nenhum livro adicionado ainda!");
         }
